@@ -5,11 +5,13 @@
 
     angular.module('imgDetectApp').controller('faceDetectionController',faceDetectionController);
 
-    faceDetectionController.$inject = ['$scope','faceDetectionService']
+    faceDetectionController.$inject = ['$scope','faceDetectionService','defaultProfilePicture']
 
-    function faceDetectionController($scope,faceDetectionService) {
+    function faceDetectionController($scope,faceDetectionService,defaultProfilePicture) {
 
-        $scope.file = null;
+        $scope.file = defaultProfilePicture;
+
+        $scope.faceDetected = null;
 
         $scope.loadImage = function (image) {
 
@@ -17,10 +19,21 @@
 
         };
 
+        $scope.triggerUpload = function() {
+            angular.element('#fileInput').trigger('click');
+        };
+
         $scope.detectFace = function () {
+
+            $scope.faceDetected = null;
+
             faceDetectionService.detectImage($scope.file).then(function (response) {
 
-                console.log(JSON.stringify(response));
+                if(response.data && response.data[0]) {
+
+                    $scope.faceDetected = response.data[0].faceAttributes;
+
+                }
 
             });
         };

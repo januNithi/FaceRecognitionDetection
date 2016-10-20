@@ -4,7 +4,7 @@
 (function () {
     angular.module('imgDetectApp').
     config(config);
-
+    angular.module('imgDetectApp').constant('defaultProfilePicture', 'images/selectIcon.png');
     config.inject = ['$routeProvider', '$locationProvider']
     function config($routeProvider,$locationProvider) {
         $routeProvider.

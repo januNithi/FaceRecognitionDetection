@@ -11,6 +11,8 @@ var unirest = require('unirest');
 
 var fs = require('fs');
 
+var gm = require('gm').subClass({imageMagick: true});
+
 var value = 0;
 
 var oxford = require('project-oxford'),
@@ -24,7 +26,7 @@ var storage = multer.diskStorage({ //multers disk storage settings
         console.log("req.body" + req.body.file);
         cb(null, file.originalname);
         //
-        var path = 'http://localhost:3000/uploads/'+file.originalname;
+        var path = 'http://ec2-54-244-76-229.us-west-2.compute.amazonaws.com:3000/uploads/'+file.originalname;
 
         // videoClient.video.trackFace({
         //     url : 'https://youtu.be/Dz_8RoyNs60'
@@ -81,23 +83,9 @@ var storageToDetect = multer.diskStorage({ //multers disk storage settings
         console.log("req.body" + req.body.file);
         cb(null, file.originalname);
         //
-        var path = 'http://192.168.1.95:3000/public/uploads/'+file.originalname;
+        var path = 'http://ec2-54-244-76-229.us-west-2.compute.amazonaws.com:3000/uploads/'+file.originalname;
+        req.session.facePath = path;
 
-        faceClient.face.detect({
-            url: path,
-            analyzesAge: true,
-            analyzesGender: true,
-            returnFaceId: true
-
-        }).then(function (response) {
-            console.log('The age is: ' + response[0].faceAttributes.age);
-            console.log('The gender is: ' + response[0].faceAttributes.gender);
-
-            req.session.face = [];
-            req.session.face = response;
-        },function (error) {
-            console.log('error'+error);
-        });
     }
 });
 
@@ -126,7 +114,28 @@ exports.detectImage = function (req,res) {
         if(err) {
             res.send(500, {error: err});
         }
-        res.send(req.session);
+        faceClient.face.detect({
+            url: req.session.facePath,
+            analyzesAge: true,
+            analyzesGender: true,
+            returnFaceId: true
+
+        }).then(function (response) {
+            // console.log('The age is: ' + response[0].faceAttributes.age);
+            // console.log('The gender is: ' + response[0].faceAttributes.gender);
+
+            // var pic = gm("http://www.thehindu.com/multimedia/dynamic/02536/06CP_Sivakarthikey_2536872g.jpg")
+            //     .drawRectangle(response[0].faceRectangle.height, response[0].faceRectangle.left,
+            //         response[0].faceRectangle.top,response[0].faceRectangle.width);
+            // pic.write('t.png', function (err,response) {
+            //     if ( err ) throw err;
+            //     res.send(response);
+            // });
+            res.send(response);
+
+        },function (error) {
+            console.log('error'+error);
+        });
     });
 
 };
