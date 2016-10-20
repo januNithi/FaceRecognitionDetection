@@ -11,6 +11,8 @@
 
         $scope.file = defaultProfilePicture;
 
+        $scope.spinner = false;
+
         $scope.faceDetected = null;
 
         $scope.loadImage = function (image) {
@@ -25,6 +27,8 @@
 
         $scope.detectFace = function () {
 
+            $scope.spinner = true;
+
             $scope.faceDetected = null;
 
             faceDetectionService.detectImage($scope.file).then(function (response) {
@@ -34,6 +38,8 @@
                     $scope.faceDetected = response.data[0].faceAttributes;
 
                 }
+
+                $scope.spinner = false;
 
             });
         };

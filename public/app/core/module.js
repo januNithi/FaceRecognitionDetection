@@ -3,5 +3,7 @@
  */
 angular.module('imgDetectApp',[
     'ngRoute',
-    'ngFileUpload'
+    'ngFileUpload',
+    'ngAnimate',
+    'treasure-overlay-spinner'
 ]);

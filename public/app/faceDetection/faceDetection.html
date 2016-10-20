@@ -1,86 +1,90 @@
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand">Home</a>
+<treasure-overlay-spinner active='spinner'>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand">Home</a>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
-<div>
+    <div>
 
-    <div class="panel panel-default">
+        <div class="panel panel-default">
 
-        <div class="panel-heading">
+            <div class="panel-heading">
 
-            <Strong>Face Detection</Strong>
-
-        </div>
-
-        <div class="panel-body">
-
-            <div class="row">
-
-                <div class="col-xs-6">
-
-                    <form>
-
-                        <div class="form-group">
-
-                            <label class="control-label" for="fileInput">Choose Image</label>
-
-                            <img ngf-src="file" class="image-holder img-responsive" ng-click="triggerUpload()"/>
-
-                            <input ng-hide = 'true' class="form-control" type="file" ngf-select ng-model="file"
-                                   ngf-max-size="20MB" id="fileInput"
-                                   onchange="angular.element(this).scope().loadImage(this.files)"/>
-
-                        </div>
-
-                        <div class="form-group">
-
-                            <button class="btn btn-danger" ng-click="detectFace()">Detect Face</button>
-
-                        </div>
-
-                    </form>
-
-                </div>
-
-                <div class="col-xs-6">
-
-                    <div  ng-if="faceDetected">
-
-                        <h1>Face Detected</h1>
-
-                    </div>
-
-                    <div  ng-if="!faceDetected">
-
-                        <h1>Face Doesn't Exist</h1>
-
-                    </div>
-
-                    <div  ng-if="faceDetected">
-
-                        Age Around: {{faceDetected.age}}
-
-                    </div>
-
-                    <div  ng-if="faceDetected">
-
-                        Gender: {{faceDetected.gender}}
-
-                    </div>
-
-                </div>
+                <Strong>Face Detection</Strong>
 
             </div>
 
+            <div class="panel-body">
 
+                <div class="row">
+
+                    <div class="col-xs-6">
+
+                        <form>
+
+                            <div class="form-group">
+
+                                <label class="control-label" for="fileInput">Choose Image</label>
+
+                                <img ngf-src="file" class="image-holder img-responsive" ng-click="triggerUpload()"/>
+
+                                <input ng-hide = 'true' class="form-control" type="file" ngf-select ng-model="file"
+                                       ngf-max-size="20MB" id="fileInput"
+                                       onchange="angular.element(this).scope().loadImage(this.files)"/>
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <button class="btn btn-danger" ng-click="detectFace()">Detect Face</button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                    <div class="col-xs-6">
+
+                        <div  ng-if="faceDetected">
+
+                            <h1>Face Detected</h1>
+
+                        </div>
+
+                        <div  ng-if="!faceDetected">
+
+                            <h1>Face Doesn't Exist</h1>
+
+                        </div>
+
+                        <div  ng-if="faceDetected">
+
+                            Age Around: {{faceDetected.age}}
+
+                        </div>
+
+                        <div  ng-if="faceDetected">
+
+                            Gender: {{faceDetected.gender}}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
 
         </div>
 
+
     </div>
 
-
-</div>
+</treasure-overlay-spinner>
