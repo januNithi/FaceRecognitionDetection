@@ -13,4 +13,6 @@ module.exports = function (app) {
     
     app.get('/compareImages',upload.compareImages);
 
+    app.post('/recognizeFaces',upload.recognizeFaces);
+
 }

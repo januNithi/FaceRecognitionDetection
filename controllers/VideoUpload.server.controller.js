@@ -140,13 +140,20 @@ exports.detectImage = function (req,res) {
 
 };
 
+exports.recognizeFaces = function (req,res) {
+    faceClient.face.verify(
+        req.body
+    ).then(function (response) {
+        req.session = null;
+
+    });
+}
+
 exports.compareImages = function (req,res) {
     client.face.verify(
         req.session.faceId
     ).then(function (response) {
-        req.session = null;
-        console.log('The age is: ' + response[0].faceAttributes.age);
-        console.log('The gender is: ' + response[0].faceAttributes.gender);
+        res.send(response);
 
     });
 };

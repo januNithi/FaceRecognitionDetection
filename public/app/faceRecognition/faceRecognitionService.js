@@ -11,17 +11,19 @@
 
         return {
 
-            loadVideo : function (image) {
+            detectImage : function (image) {
 
                 return Upload.upload({
-                    url : '/videoUpload',
+                    url : '/detectImage',
                     data: {files: image}
                 });
 
             },
 
-            compareImages : function () {
-                return $http.get('/compareImages');
+            compareImages : function (faceId,faceId1) {
+
+                return $http.post('/recognizeFaces',[faceId,faceId1]);
+
             }
 
         }

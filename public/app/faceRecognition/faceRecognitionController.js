@@ -5,24 +5,84 @@
 
     angular.module('imgDetectApp').controller('faceRecognitionController',faceRecognitionController);
 
-    faceRecognitionController.$inject = ['$scope','faceRecognitionService']
+    faceRecognitionController.$inject = ['$scope','faceRecognitionService','defaultProfilePicture']
 
-    function faceRecognitionController($scope,faceRecognitionService) {
+    function faceRecognitionController($scope,faceRecognitionService,defaultProfilePicture) {
 
-        $scope.file = null;
+        $scope.file = defaultProfilePicture;
+        $scope.file1 = defaultProfilePicture;
 
-        $scope.loadVideo = function (video) {
+        $scope.spinner = false;
+        
+        $scope.faceIdentical = false;
 
-            videoUploadService.loadVideo(video).then(function (result) {
-                console.log(JSON.stringify(result));
+        $scope.faceDetected = null;
+        $scope.faceDetected1 = null;
+        
+        $scope.loadImage = function (image) {
+
+            $scope.file = image[0];
+
+            $scope.spinner = true;
+
+            $scope.faceDetected = null;
+
+            faceDetectionService.detectImage($scope.file).then(function (response) {
+
+                if(response.data && response.data[0]) {
+
+                    $scope.faceDetected = response.data[0];
+
+                }
+
+                $scope.spinner = false;
+
             });
 
-        }
+        };
 
-        $scope.compareImages = function () {
-            videoUploadService.compareImages().then(function (response) {
+        $scope.loadImage1 = function (image) {
 
-                console.log(JSON.stringify(response));
+            $scope.file1 = image[0];
+
+            $scope.spinner = true;
+
+            $scope.faceDetected1 = null;
+
+            faceDetectionService.detectImage($scope.file1).then(function (response) {
+
+                if(response.data && response.data[0]) {
+
+                    $scope.faceDetected1 = response.data[0];
+
+                }
+
+                $scope.spinner = false;
+
+            });
+
+        };
+
+        $scope.triggerUpload = function() {
+            angular.element('#fileInput').trigger('click');
+        };
+        $scope.triggerUpload1 = function() {
+            angular.element('#fileInput1').trigger('click');
+        };
+
+        $scope.compareFaces = function () {
+
+            $scope.spinner = true;
+
+            faceDetectionService.compareImages($scope.faceDetected.faceId,$scope.faceDetected1.faceId).then(function (response) {
+
+                if(response.data ) {
+
+                    $scope.faceIdentical = response.data.isIdentical;
+
+                }
+
+                $scope.spinner = false;
 
             });
         };
