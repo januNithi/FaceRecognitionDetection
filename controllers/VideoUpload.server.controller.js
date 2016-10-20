@@ -144,7 +144,7 @@ exports.recognizeFaces = function (req,res) {
     faceClient.face.verify(
         req.body
     ).then(function (response) {
-        req.session = null;
+        res.send(response);
 
     });
 }
