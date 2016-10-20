@@ -11,7 +11,7 @@ var unirest = require('unirest');
 
 var fs = require('fs');
 
-var gm = require('gm').subClass({imageMagick: true});
+//var gm = require('gm').subClass({imageMagick: true});
 
 var value = 0;
 
