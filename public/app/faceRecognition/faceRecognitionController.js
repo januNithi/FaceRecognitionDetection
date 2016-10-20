@@ -27,7 +27,7 @@
 
             $scope.faceDetected = null;
 
-            faceDetectionService.detectImage($scope.file).then(function (response) {
+            faceRecognitionService.detectImage($scope.file).then(function (response) {
 
                 if(response.data && response.data[0]) {
 
@@ -49,7 +49,7 @@
 
             $scope.faceDetected1 = null;
 
-            faceDetectionService.detectImage($scope.file1).then(function (response) {
+            faceRecognitionService.detectImage($scope.file1).then(function (response) {
 
                 if(response.data && response.data[0]) {
 
@@ -74,7 +74,7 @@
 
             $scope.spinner = true;
 
-            faceDetectionService.compareImages($scope.faceDetected.faceId,$scope.faceDetected1.faceId).then(function (response) {
+            faceRecognitionService.compareImages($scope.faceDetected.faceId,$scope.faceDetected1.faceId).then(function (response) {
 
                 if(response.data ) {
 
