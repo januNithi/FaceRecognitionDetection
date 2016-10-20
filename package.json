@@ -1,0 +1,27 @@
+{
+  "name": "VideoImageDetection",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "^1.13.3",
+    "bower": "^1.7.9",
+    "clarifai": "^2.0.9",
+    "cookie-parser": "~1.3.5",
+    "debug": "~2.2.0",
+    "express": "^4.13.4",
+    "express-session": "^1.14.1",
+    "ffmpeg": "0.0.4",
+    "jade": "~1.11.0",
+    "morgan": "^1.6.1",
+    "multer": "^1.2.0",
+    "path": "^0.12.7",
+    "project-oxford": "^1.5.0",
+    "request": "^2.75.0",
+    "serve-favicon": "~2.3.0",
+    "unirest": "^0.5.1",
+    "watson-developer-cloud": "^2.6.1"
+  }
+}

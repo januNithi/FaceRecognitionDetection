@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Image Detection and Recognization</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="bower_components/font-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+
+
+    <base href="/">
+</head>
+<body ng-app="imgDetectApp">
+
+    <ng-view></ng-view>
+
+    <!--Footer-->
+
+    <footer class="footer">
+        <div class="container">
+            <center class="text-muted"><i class="fa fa-copyright" aria-hidden="true"> Designed and Developed By Crisp Cloud Solutions</i></center>
+        </div>
+    </footer>
+
+    <!-- LIBRARIES AND PLUGINS -->
+
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/ng-file-upload/ng-file-upload.min.js"></script>
+    <script src="bower_components/ng-file-upload/ng-file-upload-shim.min.js"></script>
+
+    <!--Modules and Configs-->
+    <script src="app/core/module.js"></script>
+    <script src="app/core/config.js"></script>
+
+    <!--Home-->
+
+    <script src="app/home/homeService.js"></script>
+    <script src="app/home/homeController.js"></script>
+
+    <!--Face Detection-->
+
+    <script src="app/faceDetection/faceDetectionService.js"></script>
+    <script src="app/faceDetection/faceDetectionController.js"></script>
+
+    <!--Face Recognition-->
+
+    <script src="app/faceRecognition/faceRecognitionService.js"></script>
+    <script src="app/faceRecognition/faceRecognitionController.js"></script>
+
+    <!--Video Upload-->
+
+    <script src="app/videoUpload/videoUploadService.js"></script>
+    <script src="app/VideoUpload/videoUploadController.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,46 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand">Home</a>
+        </div>
+    </div>
+</nav>
+
+<div>
+
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+
+            <Strong>Face Detection</Strong>
+
+        </div>
+
+        <div class="panel-body">
+
+           <form>
+
+               <div class="form-group">
+
+                   <label class="control-label" for="fileInput">Choose Image</label>
+
+                   <input class="form-control" type="file" ngf-select ng-model="file"
+                          name="file" ngf-max-size="20MB" id="fileInput"
+                          onchange="angular.element(this).scope().loadImage(this.files)"/>
+
+               </div>
+
+               <div class="form-group">
+
+                   <button class="btn btn-danger" ng-click="detectFace()">Detect Face</button>
+
+               </div>
+
+           </form>
+
+        </div>
+
+    </div>
+
+
+</div>

@@ -1,0 +1,25 @@
+{
+  "name": "videoimagedetection",
+  "description": "Image Detection and recognization",
+  "main": "server.js",
+  "authors": [
+    "januNithi <csejananim@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-route": "^1.5.8",
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.6.3",
+    "ng-file-upload": "^12.2.12"
+  }
+}
