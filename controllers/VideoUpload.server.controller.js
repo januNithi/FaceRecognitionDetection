@@ -83,7 +83,7 @@ var storageToDetect = multer.diskStorage({ //multers disk storage settings
         console.log("req.body" + req.body.file);
         cb(null, file.originalname);
         //
-        var path = 'http://ec2-54-244-76-229.us-west-2.compute.amazonaws.com:3000/uploads/'+file.originalname;
+        var path = 'http://ec2-54-218-249-105.us-west-2.compute.amazonaws.com:3000/uploads/'+file.originalname;
         req.session.facePath = path;
 
     }
