@@ -17,6 +17,12 @@
 
         };
 
+        $scope.kairosHome = function () {
+
+            homeService.openKairosHome();
+
+        };
+
         $scope.openFaceRecognition = function () {
 
             homeService.faceRecognition();

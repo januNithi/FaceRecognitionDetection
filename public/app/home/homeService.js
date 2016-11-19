@@ -21,6 +21,10 @@
 
             videoRecognition : function () {
                 $window.location.href = '/videoRecognition';
+            },
+
+            openKairosHome : function () {
+                $window.location.href = '/openKairos';
             }
 
         }

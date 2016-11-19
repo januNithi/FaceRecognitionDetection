@@ -14,8 +14,8 @@
             loadVideo : function (image) {
 
                 return Upload.upload({
-                    url : '/videoUpload',
-                    data: {files: image}
+                    url : '/videoToFrames',
+                    data: {files: image[0]}
                 });
 
             },

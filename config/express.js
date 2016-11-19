@@ -10,7 +10,9 @@ var path = require('path');
 
 var morgan = require('morgan');
 
-var session = require('express-session')
+var session = require('express-session');
+
+var RateLimit = require('express-rate-limit');
 
 module.exports = function () {
 
@@ -24,7 +26,18 @@ module.exports = function () {
         next();
     });
 
+    app.enable('trust proxy'); // only if you're behind a reverse proxy (Heroku, Bluemix, AWS if you use an ELB, custom Nginx setup, etc)
+
+    var limiter = new RateLimit({
+        windowMs: 30*1000, // 15 minutes
+        max: 10000, // limit each IP to 100 requests per windowMs
+        delayMs: 0 // disable delaying - full speed until the max limit is reached
+    });
+
     app.set('trust proxy', 1) // trust first proxy
+
+    app.use(limiter);
+
     app.use(session({
         secret: 'keyboard cat',
         resave: false,
@@ -34,8 +47,12 @@ module.exports = function () {
 
     app.use(express.static('./public'));
 
+    require('../routes/skyBiometryAPI.server.route')(app);
+    require('../routes/cloudSightAPI.server.route')(app);
+    require('../routes/clarifaiAPI.server.route')(app);
     require('../routes/VideoUpload.server.route')(app);
-
+    require('../routes/kairosAPI.server.route')(app);
+    require('../routes/videoToFrames.server.route')(app);
 
     //layout
     require('../routes/layout.server.route')(app);
