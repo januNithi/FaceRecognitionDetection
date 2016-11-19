@@ -61,7 +61,6 @@ exports.convertToFrames = function (req,res) {
                                 analyzesAge: true,
                                 analyzesGender: true,
                                 returnFaceId: true
-
                             }).then(function (response) {
                                 if(response && response.lemgth > 0){
                                     var obj = {
