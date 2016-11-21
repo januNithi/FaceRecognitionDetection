@@ -40,6 +40,10 @@
 
                 console.log(JSON.stringify(response));
 
+            },function (error) {
+
+                $scope.error = error;
+
             });
         };
         

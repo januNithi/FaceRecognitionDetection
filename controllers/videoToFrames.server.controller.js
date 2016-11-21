@@ -37,12 +37,14 @@ exports.convertToFrames = function (req,res) {
         try {
             var process = new ffmpeg(req.session.videoUpload);
             var fileList = fs.readdirSync('public/uploads/frames');
-            for (var i = 0; i < fileList.length; i++) {
-                var filePath = 'public/uploads/frames/' + fileList[i];
-                if (fs.statSync(filePath).isFile())
-                    fs.unlinkSync(filePath);
-                else
-                    rmDir(filePath);
+            if(fileList && fileList.length > 0) {
+                for (var i = 0; i < fileList.length; i++) {
+                    var filePath = 'public/uploads/frames/' + fileList[i];
+                    if (fs.statSync(filePath).isFile())
+                        fs.unlinkSync(filePath);
+                    else
+                        rmDir(filePath);
+                }
             }
             process.then(function (video) {
                 // Callback mode
@@ -50,37 +52,41 @@ exports.convertToFrames = function (req,res) {
                     frame_rate : 1,
                     file_name : 'my_frame_%t_%s'
                 }, function (error, files) {
-                    if (!error)
+                    if (!error) {
                         // console.log('Frames: ' + files);
                         // files.forEach(function (value,index) {
+                        console.log(files);
                         var fileList = files;
-                        fileList.forEach(function (value,index) {
+                        fileList.forEach(function (value, index) {
                             var path = value.split('/');
                             faceClient.face.detect({
-                                url: 'public/uploads/frames/'+path[path.length-1],
+                                url: 'public/uploads/frames/' + path[path.length - 1],
                                 analyzesAge: true,
                                 analyzesGender: true,
                                 returnFaceId: true
-                                
+
                             }).then(function (response) {
-                                if(response && response.lemgth > 0){
+                                if (response && response.lemgth > 0) {
                                     var obj = {
-                                        path : value,
-                                        faceId : response[0].faceId,
-                                        faceAttributes : response[0].faceAttributes,
-                                        faceRectangle : response[0].faceRectangle
+                                        path: value,
+                                        faceId: response[0].faceId,
+                                        faceAttributes: response[0].faceAttributes,
+                                        faceRectangle: response[0].faceRectangle
                                     };
                                     responseData.push(obj);
-                                    if((index+1) == fileList.length){
+                                    if ((index + 1) == fileList.length) {
                                         response.send(responseData);
                                     }
                                 }
 
-                            },function (error) {
-                                console.log('error'+error);
+                            }, function (error) {
+                                console.log('error' + error);
                             });
                         });
-
+                    }else{
+                        console.log('error' + error);
+                        res.send(500,{error:error});
+                    }
 
                         // });
                         // res.send(files);
