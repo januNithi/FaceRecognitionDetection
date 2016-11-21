@@ -21,6 +21,10 @@
                 // console.log(JSON.stringify(result));
                 $scope.frames = result.data;
                 $scope.showFrames = true;
+            },function (error) {
+
+                $scope.error = error;
+
             });
             
         };
