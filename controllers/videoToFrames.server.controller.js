@@ -61,7 +61,7 @@ exports.convertToFrames = function (req,res) {
                         fileList.forEach(function (value, index) {
                             var path = value.split('/');
                             faceClient.face.detect({
-                                url: 'public/uploads/frames/' + path[path.length - 1],
+                                url: 'http://ec2-54-213-204-78.us-west-2.compute.amazonaws.com:3000/uploads/frames/' + path[path.length - 1],
                                 analyzesAge: true,
                                 analyzesGender: true,
                                 returnFaceId: true
