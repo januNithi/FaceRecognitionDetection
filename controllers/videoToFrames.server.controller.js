@@ -82,6 +82,7 @@ exports.convertToFrames = function (req,res) {
 
                             }, function (error) {
                                 console.log('error' + error);
+                                res.send(500,{error:error});
                             });
                         });
                     }else{
