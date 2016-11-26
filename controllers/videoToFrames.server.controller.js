@@ -50,6 +50,7 @@ exports.convertToFrames = function (req,res) {
                 // Callback mode
                 video.fnExtractFrameToJPG('public/uploads/frames', {
                     frame_rate : 1,
+                    number : 5,
                     file_name : 'my_frame_%t_%s'
                 }, function (error, files) {
                     if (!error) {
