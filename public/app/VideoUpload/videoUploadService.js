@@ -20,8 +20,26 @@
 
             },
 
+            detectFaces : function (data) {
+                var  obj = {
+                    face : data
+                }
+                return $http.post('/facesInFrames',obj);
+            },
+
             compareImages : function () {
                 return $http.get('/compareImages');
+            },
+
+            recognizeFaces : function (data,origImg) {
+                return $http.post("/recognizedFaces?img="+origImg,data);
+            },
+
+            loadImage : function (image) {
+                return Upload.upload({
+                    url:'/loadImage',
+                    data:{files:image[0]}
+                });
             }
 
         }

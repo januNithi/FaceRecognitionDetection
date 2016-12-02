@@ -7,4 +7,10 @@ module.exports = function (app) {
 
     app.post('/videoToFrames',videoToFrames.convertToFrames);
 
+    app.post('/facesInFrames',videoToFrames.getFramesContainingFaces);
+
+    app.post('/recognizedFaces',videoToFrames.getFramesRecognized);
+
+    app.post('/loadImage',videoToFrames.loadImage);
+
 };

@@ -1,0 +1,9 @@
+.page-head-line {
+    font-weight: 900;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #3b30f0;
+    text-transform: uppercase;
+    color: #000000;
+    font-size: 20px;
+    margin-bottom: 40px;
+}

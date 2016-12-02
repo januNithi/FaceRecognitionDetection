@@ -1,62 +1,154 @@
-<div class="panel panel-primary">
+<treasure-overlay-spinner active='spinner'>
 
-    <div class="panel-heading">
-        <h3>Upload a Video</h3>
-    </div>
+    <div class="panel panel-primary">
 
-    <div class="panel-body">
+        <div class="panel-heading">
+            <h3 ng-show="!showFrames">Upload a Video</h3>
+            <h3 ng-if="showFrames && faceDetectedFrames.length == 0">Frames in Video</h3>
+            <h3 ng-if="faceDetectedFrames.length > 0">Faces Detected</h3>
+        </div>
 
-        <form id="fileUpload" >
+        <div class="panel-body">
 
-            <div class="form-group" ng-show="!showFrames">
+            <form id="fileUpload" >
 
-                <label class="control-label" for="fileInput">Upload Video</label>
+                <div class="form-group" ng-show="!showFrames">
 
-                <input type="file" ngf-select ng-model="file" multiple
-                        name="file" ngf-max-size="20MB" id="fileInput"
-                       onchange="angular.element(this).scope().loadVideo(this.files)"/>
+                    <label class="control-label" for="fileInput">Upload Video</label>
 
-            </div>
+                    <input type="file" ngf-select ng-model="file" multiple
+                            name="file" ngf-max-size="20MB" id="fileInput"
+                           onchange="angular.element(this).scope().loadVideo(this.files)"/>
 
-            <div class="form-group" ng-show="showFrames">
+                </div>
 
-                <label class="control-label" for="fileImageInput">Load Image To Compare</label>
 
-                <input type="file" ngf-select ng-model="imageFile"
-                       name="imageFile" ngf-max-size="20MB" id="fileImageInput"
-                       onchange="angular.element(this).scope().loadImage(this.files)"/>
 
-            </div>
+                <div class="form-group" ng-show="showFrames">
 
-            <div class="form-group" ng-show="showFrames" style="max-height: 500px;overflow-y: scroll;border: groove;">
+                    <div class="row">
 
-                <div class="row" >
 
-                    <div class="col-lg-3 col-md-4 col-xs-6 thumb" ng-repeat="frame in frames">
+                        <div class="col-xs-4">
 
-                        <img ngf-src="showImages(frame.path)" class="image-holder img-responsive"/>
+
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h2 class="page-head-line">Total Frames : {{frames.length}}</h2>
+
+                                    <div>
+
+                                        <button class="btn btn-danger" ng-click="detectFaces()">Detect Faces</button>
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div ng-show="faceDetectedFrames.length > 0" class="row">
+                                <div class="col-md-12">
+                                    <h2 class="page-head-line">Total Faces : {{faceDetectedFrames.length}}</h2>
+
+
+
+                                </div>
+                            </div>
+
+                            <div ng-show="faceDetectedFrames.length > 0">
+
+                                <label class="control-label" for="fileImageInput">Load Image To Compare</label>
+
+                                <img ngf-src="file" class="image-holder img-responsive" ng-click="triggerUpload()"/>
+
+                                <input ng-show="false" type="file" ngf-select ng-model="imageFile"
+                                       name="imageFile" ngf-max-size="20MB" id="fileImageInput"
+                                       onchange="angular.element(this).scope().loadImage(this.files)"/>
+
+                                <div ng-if="originalFaceDetected"  class="alert alert-success">
+
+                                    <strong>Face Detected</strong>
+
+                                    Age Around : {{originalFaceDetected.faceAttributes.age}};
+
+                                    Gender : {{originalFaceDetected.faceAttributes.gender}};
+
+                                </div>
+
+                                <div>
+
+                                    <button class="btn btn-danger" ng-click="recognizeFaces()">Recognize Faces</button>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        <div ng-show="showFrames && faceDetectedFrames.length == 0" class="col-xs-8">
+                            <div class="row"  style="max-height: 500px;overflow-y: scroll;border: groove;" >
+
+                                <div class="col-lg-3 col-md-4 col-xs-6 thumb" ng-repeat="frame in frames">
+
+                                    <img ngf-src="showImages(frame)" class="image-holder img-responsive"/>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div ng-if="faceDetectedFrames.length > 0" class="col-xs-8">
+                            <div class="row"  style="max-height: 500px;overflow-y: scroll;border: groove;" >
+
+                                <div ng-if="face.path" class="col-lg-3 col-md-4 col-xs-6 thumb" ng-repeat="face in faceDetectedFrames">
+
+                                    <img ngf-src="showImages(face.path)" class="image-holder img-responsive"/>
+
+                                </div>
+
+                            </div>
+                        </div>
 
                     </div>
 
                 </div>
 
-            </div>
+                <div>
 
-            <div class="form-group" ng-show="error">
+                    <div ng-show="facesRecognized.length > 0" class="row">
+                        <div class="col-md-12">
+                            <h2 class="page-head-line">Total Faces Match : {{facesRecognized.length}}</h2>
 
-                {{error}}
+                        </div>
+                    </div>
 
-            </div>
+                    <div ng-if="facesRecognized.length" class="col-lg-3 col-md-4 col-xs-6 thumb" ng-repeat="face in facesRecognized">
+
+                        <img ngf-src="showImages(face.value.path)" class="image-holder img-responsive"/>
+
+                    </div>
+
+                </div>
+
+                <div class="form-group" ng-show="error">
+
+                    {{error}}
+
+                </div>
 
 
-        </form>
+            </form>
+
+        </div>
+
+        <div class="panel-footer">
+
+
+
+        </div>
 
     </div>
 
-    <div class="panel-footer">
-
-
-
-    </div>
-
-</div>
+</treasure-overlay-spinner>
