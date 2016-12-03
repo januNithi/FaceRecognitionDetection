@@ -18,7 +18,6 @@ var storage = multer.diskStorage({ //multers disk storage settings
         cb(null, 'public/uploads');
     },
     filename: function (req, file, cb) {
-        console.log("req.body" + req.body.file);
         cb(null, file.originalname);
         var path = 'public/uploads/'+file.originalname;
         req.session.videoUpload = path;
@@ -36,6 +35,7 @@ exports.convertToFrames = function (req,res) {
 
     upload(req,res,function (err) {
         if(err){
+            console.log(err);
             res.send(500,{error:err});
         }
         try {
