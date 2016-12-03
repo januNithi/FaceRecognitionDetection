@@ -80,6 +80,7 @@ exports.convertToFrames = function (req,res) {
         } catch (e) {
             console.log(e.code);
             console.log(e.msg);
+            console.log(e);
             res.send(500,{error:e});
         }
     });
