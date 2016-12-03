@@ -136,7 +136,7 @@ exports.loadImage = function (req,res) {
         }
         var path = req.session.videoUpload.split('/');
         faceClient.face.detect({
-            url: 'http://ec2-54-187-235-177.us-west-2.compute.amazonaws.com:3000/uploads/' + path[path.length - 1],
+            url: 'http://ec2-54-200-231-158.us-west-2.compute.amazonaws.com:3000/uploads/' + path[path.length - 1],
             analyzesAge: true,
             analyzesGender: true,
             returnFaceId: true
