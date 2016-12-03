@@ -53,6 +53,7 @@ module.exports = function () {
     require('../routes/VideoUpload.server.route')(app);
     require('../routes/kairosAPI.server.route')(app);
     require('../routes/videoToFrames.server.route')(app);
+    require('../routes/nodeFace.server.route')(app);
 
     //layout
     require('../routes/layout.server.route')(app);
