@@ -171,11 +171,13 @@ exports.getFramesRecognized = function (req,res) {
             [value.faceId,origImg]
         ).then(function (response) {
             i++;
-            var obj = {
-                value : value,
-                match : response
+            if(response.isIdentical) {
+                var obj = {
+                    value: value,
+                    match: response
+                }
+                facesData.push(obj);
             }
-            facesData.push(obj);
             if((i) == receivedData.length){
                 res.send(facesData);
             }
