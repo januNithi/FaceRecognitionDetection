@@ -34,7 +34,7 @@ exports.convertToFrames = function (req,res) {
     var responseData = [];
 
     upload(req,res,function (err) {
-        if(err){
+        if(err != undefined || err != null){
             console.log(err);
             res.send(500,{error:err});
         }
