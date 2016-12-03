@@ -94,7 +94,7 @@ exports.getFramesContainingFaces = function (req,res) {
         var pathName = value;
         var path = pathName.split('/');
         faceClient.face.detect({
-            url: 'http://ec2-54-187-235-177.us-west-2.compute.amazonaws.com:3000/uploads/frames/' + path[path.length - 1],
+            url: 'http://ec2-54-200-231-158.us-west-2.compute.amazonaws.com:3000/uploads/frames/' + path[path.length - 1],
             analyzesAge: true,
             analyzesGender: true,
             returnFaceId: true
@@ -110,7 +110,7 @@ exports.getFramesContainingFaces = function (req,res) {
                 };
                 facesData.push(obj);
 
-                if((i + 1) == receivedData.length){
+                if((i) == receivedData.length){
                     res.send(facesData);
                 }
             }
@@ -118,7 +118,7 @@ exports.getFramesContainingFaces = function (req,res) {
             i++;
             console.log('error' + error);
             errorData.push(error);
-            if((i + 1) == receivedData.length) {
+            if((i) == receivedData.length) {
                 res.send(500, {error: errorData});
             }
         });
@@ -173,13 +173,13 @@ exports.getFramesRecognized = function (req,res) {
                 match : response
             }
             facesData.push(obj);
-            if((i+1) == receivedData.length){
+            if((i) == receivedData.length){
                 res.send(facesData);
             }
         },function (error) {
             i++;
             errorData.push(error);
-            if((i+1) == receivedData.length){
+            if((i) == receivedData.length){
                 res.send(500,{error:errorData});
             }
         });

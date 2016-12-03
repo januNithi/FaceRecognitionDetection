@@ -37,7 +37,7 @@
                                 <div class="col-md-12">
                                     <h2 class="page-head-line">Total Frames : {{frames.length}}</h2>
 
-                                    <div>
+                                    <div ng-hide="faceDetectedFrames.length > 0">
 
                                         <button class="btn btn-danger" ng-click="detectFaces()">Detect Faces</button>
 
@@ -60,7 +60,9 @@
 
                                 <label class="control-label" for="fileImageInput">Load Image To Compare</label>
 
-                                <img ngf-src="file" class="image-holder img-responsive" ng-click="triggerUpload()"/>
+                                <img ngf-src="showOriginalImage()" class="image-holder img-responsive"  ng-click="triggerUpload()"/>
+
+                                <!--<img ngf-src="file" class="image-holder img-responsive" ng-click="triggerUpload()"/>-->
 
                                 <input ng-show="false" type="file" ngf-select ng-model="imageFile"
                                        name="imageFile" ngf-max-size="20MB" id="fileImageInput"
@@ -76,7 +78,7 @@
 
                                 </div>
 
-                                <div>
+                                <div ng-show="faceDetectedFrames.length > 0">
 
                                     <button class="btn btn-danger" ng-click="recognizeFaces()">Recognize Faces</button>
 

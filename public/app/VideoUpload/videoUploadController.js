@@ -45,6 +45,12 @@
             
         };
 
+        $scope.showOriginalImage = function () {
+
+            return $scope.file;
+
+        };
+
         $scope.detectFaces = function () {
             $scope.spinner = true;
             $scope.faceDetectedFrames = [];
