@@ -46,8 +46,7 @@ exports.convertToFrames = function (req,res) {
                     var filePath = 'public/uploads/frames/' + fileList[i];
                     if (fs.statSync(filePath).isFile())
                         fs.unlinkSync(filePath);
-                    else
-                        rmDir(filePath);
+
                 }
             }
             process.then(function (video) {
