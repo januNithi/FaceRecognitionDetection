@@ -39,8 +39,11 @@ exports.convertToFrames = function (req,res) {
             res.send(500,{error:err});
         }
         try {
+            console.log("fileList Length0:"+fileList.length);
             var process = new ffmpeg(req.session.videoUpload);
+            console.log("fileList Length1:"+fileList.length);
             var fileList = fs.readdirSync('public/uploads/frames');
+            console.log("fileList Length2:"+fileList.length);
             if(fileList && fileList.length > 0) {
                 for (var i = 0; i < fileList.length; i++) {
                     var filePath = 'public/uploads/frames/' + fileList[i];
